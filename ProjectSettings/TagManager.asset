@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Scarecrow
+  - Crow
   layers:
   - Default
   - TransparentFX
@@ -49,4 +51,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 4141036313
+    locked: 0
+  - name: Camera
+    uniqueID: 3392112393
     locked: 0

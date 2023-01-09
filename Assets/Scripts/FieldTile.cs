@@ -11,12 +11,11 @@ public class FieldTile : MonoBehaviour
     public SpriteRenderer sr;
     private bool _tilled;
 
-    [Header("Sprites")] 
-    public Sprite grassSprite;
+    [Header("Sprites")] public Sprite grassSprite;
     public Sprite tilledSprite;
     public Sprite wateredTilledSprite;
 
-    private void Start()
+    private void Awake()
     {
         //set the default grass sprite
         sr.sprite = grassSprite;
@@ -42,9 +41,10 @@ public class FieldTile : MonoBehaviour
         }
     }
 
+
     void PlantNewCrop(CropData crop)
     {
-        if(!_tilled)
+        if (!_tilled)
             return;
 
         _curCrop = Instantiate(cropPrefab, transform).GetComponent<Crop>();
@@ -53,13 +53,21 @@ public class FieldTile : MonoBehaviour
         GameManager.instance.onNewDay += OnNewDay;
     }
 
-    void Till()
+    public void PlantSeed()
+    {
+        if (HasCrop() || !_tilled)
+            return;
+        PlantNewCrop(GameManager.instance.selectedCropToPlant);
+    }
+    
+
+    public void Till()
     {
         _tilled = true;
         sr.sprite = tilledSprite;
     }
 
-    void Water()
+    public void Water()
     {
         sr.sprite = wateredTilledSprite;
 
@@ -85,7 +93,7 @@ public class FieldTile : MonoBehaviour
         }
     }
 
-    bool HasCrop()
+    public bool HasCrop()
     {
         return _curCrop != null;
     }
