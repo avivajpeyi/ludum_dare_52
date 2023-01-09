@@ -3237,8 +3237,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldTiles: []
-  hasCrop: 
-  unplantedTiles: 
 --- !u!4 &947837008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9042596080754023738, guid: efe6dd168e87b944b8ad0a5a97f29f0f, type: 3}
@@ -5042,6 +5040,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9042596080754023738, guid: efe6dd168e87b944b8ad0a5a97f29f0f, type: 3}
   m_PrefabInstance: {fileID: 1999687290}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1698780379 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3674102161508551484, guid: 545332d2753c648ee9321251130525a2, type: 3}
+  m_PrefabInstance: {fileID: 3674102162841461961}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1698780386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698780379}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a232b1fe157644e8eb5ebd0884e42abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crowDangerRadius: 3
+  crowFactory: {fileID: 0}
+  fieldManager: {fileID: 0}
+  targetPos: {x: 0, y: 0}
+  distToTarget: 0
 --- !u!4 &1700615465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9042596080754023738, guid: efe6dd168e87b944b8ad0a5a97f29f0f, type: 3}
@@ -10457,10 +10477,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3674102161508551472, guid: 545332d2753c648ee9321251130525a2, type: 3}
-      propertyPath: moveSpeed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3674102161508551475, guid: 545332d2753c648ee9321251130525a2, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -10509,9 +10525,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3674102161508551487, guid: 545332d2753c648ee9321251130525a2, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
+    - target: {fileID: 3674102162021565061, guid: 545332d2753c648ee9321251130525a2, type: 3}
+      propertyPath: m_Size.y
+      value: 1.213808
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674102162021565061, guid: 545332d2753c648ee9321251130525a2, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.37969032
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 545332d2753c648ee9321251130525a2, type: 3}
@@ -11982,6 +12002,10 @@ PrefabInstance:
       propertyPath: crowTarget
       value: 
       objectReference: {fileID: 178438647}
+    - target: {fileID: 1228141775199201269, guid: 6ccc41fbb81a54490a4711d3ebe35c08, type: 3}
+      propertyPath: maxFlyDistance
+      value: 9.46
+      objectReference: {fileID: 0}
     - target: {fileID: 2327159982492078067, guid: 6ccc41fbb81a54490a4711d3ebe35c08, type: 3}
       propertyPath: m_Name
       value: CrowFactory

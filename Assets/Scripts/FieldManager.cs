@@ -10,36 +10,26 @@ public class FieldManager : MonoBehaviour
     public static FieldManager instance;
 
     public FieldTile[] fieldTiles;
-    public List<bool> hasCrop = new List<bool>();
-    public List<int> unplantedTiles = new List<int>();
-    
+
+    // dictionary of tiles
+    private Dictionary<int, bool> tilePlantedDict = new Dictionary<int, bool>();
+
+
     private void Awake()
     {
         instance = this;
         fieldTiles = GetComponentsInChildren<FieldTile>();
-        hasCrop = new List<bool>(new bool[fieldTiles.Length]);
-        
+        tilePlantedDict = new Dictionary<int, bool>(fieldTiles.Length);
+        for (int i = 0; i < fieldTiles.Length; i++)
+        {
+            tilePlantedDict[i] = false;
+        }
     }
 
     private void Start()
     {
         InitGameTiles();
         GameManager.instance.onNewDay += OnNewDay;
-    }
-
-    private void UpdateCropList()
-    {
-        
-        unplantedTiles.Clear();
-        for (int i = 0; i < fieldTiles.Length; i++)
-        {
-            hasCrop[i] = fieldTiles[i].HasCrop();;
-            if (!hasCrop[i])
-            {
-                unplantedTiles.Add(i);
-            }   
-        }
-
     }
 
     private void OnDisable()
@@ -57,28 +47,46 @@ public class FieldManager : MonoBehaviour
     private void OnNewDay()
     {
         WaterAllTiles();
-        UpdateCropList();
         int numPlants = Random.Range(1, 4);
         PlantSeedOnRandomTiles(numPlants);
     }
 
+    List<int> getIdx(bool val)
+    {
+        List<int> idx = new List<int>();
+        foreach (KeyValuePair<int, bool> entry in tilePlantedDict)
+        {
+            if (entry.Value == val)
+            {
+                idx.Add(entry.Key);
+            }
+        }
 
+        return idx;
+    }
 
+    public List<GameObject> getGrownPlantList()
+    {
+        List<GameObject> grownPlants = new List<GameObject>();
+        List<int> plantIdxList = getIdx(true);
+
+        foreach (int idx in plantIdxList)
+        {
+            Crop c = fieldTiles[idx].GetComponentInChildren<Crop>();
+            if (c != null && c.CanHarvest())
+            {
+                grownPlants.Add(c.gameObject);
+            }
+        }
+
+        return grownPlants;
+    }
 
     void PlantSeedOnRandomTiles(int n = 1)
     {
-        
-        
-        // get unplantedIdx
-        List<int> unplantedIdx = new List<int>();
-        for (int i = 0; i < hasCrop.Count; i++)
-        {
-            if (!hasCrop[i])
-            {
-                unplantedIdx.Add(i);
-            }
-        }
-        
+        // Get all keys with "false" value from tilePlanetedDict
+        List<int> unplantedIdx = getIdx(false);
+
         // get random value from trueIdx
         for (int i = 0; i < n; i++)
         {
@@ -86,9 +94,8 @@ public class FieldManager : MonoBehaviour
             int randomTileIdx = unplantedIdx[randomIdx];
             fieldTiles[randomTileIdx].PlantSeed();
             unplantedIdx.RemoveAt(randomIdx);
+            tilePlantedDict[randomIdx] = true;
         }
-                 
-        
     }
 
     void WaterAllTiles()

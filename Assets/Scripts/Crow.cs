@@ -10,7 +10,7 @@ public class Crow : MonoBehaviour
     private Vector2 endPosition;
     private Vector2 direction;
     private float speed;
-    [SerializeField] private float magnitude;
+    
 
     private void Start()
     {
@@ -27,7 +27,6 @@ public class Crow : MonoBehaviour
     {
         FlyTo(endPosition);
         FlipIfNecessary();
-        magnitude = transform.position.magnitude;
     }
 
     void FlyTo(Vector2 position)
@@ -36,16 +35,12 @@ public class Crow : MonoBehaviour
             transform.position, position,
             speed * Time.deltaTime
         );
-        
-        if (magnitude> 20)
-            Die();
     }
-
-
-    private void OnTriggerEnter2D(Collider2D col)
+    
+    
+    public float distanceFrom(Vector3 point)
     {
-        if (col.gameObject.CompareTag("Scarecrow"))
-            Debug.Log("Attack");
+        return Vector3.Distance(point, transform.position);
     }
 
     private void FlipIfNecessary()
