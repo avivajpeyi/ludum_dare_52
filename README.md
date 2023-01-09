@@ -1,3 +1,16 @@
+# Ludum Dare 52: hayday
+![Screen Shot 2023-01-09 at 4 24 47 pm (1)](https://user-images.githubusercontent.com/15642823/211247244-51cc0210-2b9a-4442-9452-eb2b5ba1a5cd.png)
+
+Use your sick sickle to chop down hay before the crows get you! 
+
+<img width="355" alt="Screen Shot 2023-01-09 at 4 53 14 pm" src="https://user-images.githubusercontent.com/15642823/211247935-82eae4fe-d7ee-473a-957c-0861edaebcdd.png">
+
+[Youtube Vid link](https://youtu.be/06nbfPphtGg)
+
+
+
+---- 
+Below is @MrWh1t3r's original version details:
 # Farming2D
 
 ## About
